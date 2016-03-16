@@ -2336,3 +2336,64 @@ Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8b
 
 
 Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-03-15 17:07:17 -0400
+
+
+Started GET "/" for ::1 at 2016-03-15 18:06:12 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArtistsController#index as HTML
+  [1m[35mArtist Load (0.7ms)[0m  SELECT "artists".* FROM "artists"
+  Rendered artists/index.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 192ms (Views: 173.4ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-03-15 18:06:17 -0400
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArtist Load (0.4ms)[0m  [1mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSong Load (1.3ms)[0m  SELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1  [["artist_id", 1]]
+  Rendered artists/show.html.erb within layouts/application (32.7ms)
+Completed 200 OK in 82ms (Views: 68.4ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/artists/1/songs/new" for ::1 at 2016-03-15 18:06:20 -0400
+Processing by SongsController#new as HTML
+  Parameters: {"artist_id"=>"1"}
+  [1m[36mArtist Load (0.3ms)[0m  [1mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered songs/new.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 43ms (Views: 41.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/artists/1/songs" for ::1 at 2016-03-15 18:06:38 -0400
+Processing by SongsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPjuWdaIXn7S17VyVvMXDpID7qgI4b7wH+ofr5lFFRCJXNz+7PmdEvOE/NwhzJJa/9oOiLOQ2YIigVp2E579lg==", "song"=>{"title"=>"Routes are Cool", "album"=>"Github", "preview_url"=>"www.xyz.com"}, "commit"=>"Create Song", "artist_id"=>"1"}
+  [1m[35mArtist Load (0.3ms)[0m  SELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "songs" ("title", "album", "preview_url", "artist_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Routes are Cool"], ["album", "Github"], ["preview_url", "www.xyz.com"], ["artist_id", 1]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.8ms)
+
+NoMethodError (undefined method `songs_path' for #<SongsController:0x007f80dd42e3d8>):
+  app/controllers/songs_controller.rb:19:in `create'
+
+
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (11.1ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (68.1ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (46.7ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/christinemovius/.rvm/gems/ruby-2.2.3/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (104.5ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-03-15 18:06:58 -0400
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArtist Load (0.4ms)[0m  SELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSong Load (0.4ms)[0m  [1mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 1]]
+  Rendered artists/show.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 26ms (Views: 24.4ms | ActiveRecord: 0.8ms)
